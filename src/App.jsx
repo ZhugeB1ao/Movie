@@ -1,11 +1,18 @@
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./assets/components/NavBar.jsx";
-import Header from "./assets/components/Header.jsx";
+import Home from "./assets/pages/Home.jsx";
+import Movie from "./assets/pages/Movie.jsx";
+import TV from "./assets/pages/TV.jsx";
 
 function App() {
   return (
     <>
       <NavBar />
-      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movie" element={<Movie />} />
+        <Route path="/tv" element={<TV />} />
+      </Routes>
     </>
   );
 }

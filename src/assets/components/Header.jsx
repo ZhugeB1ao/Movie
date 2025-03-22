@@ -1,91 +1,31 @@
-import { useState, useEffect } from "react";
-import image from "../images/logo_dark.png";
+const Header = ({movie}) => {
+    if (!movie) return <p className="text-center text-xl">No movie data available</p>;
 
-const API_BASE_URL = import.meta.env.VITE_TMDB_API_URL;
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-const API_OPTIONS = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: `Bearer ${API_KEY}`,
-  },
-};
+    return (
+        <header
+            className="flex justify-start items-center px-28 py-40 m-0 text-white h-[90vh] w-full relative"
+            style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie?.backdrop_path})`}}
+        >
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#141414] h-full "></div>
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#141414] h-full "></div>
 
-const Header = () => {
-  const [errorMessage, setErrorMessage] = useState("");
-  const [movieLists, setMovieList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchMovies = async () => {
-    setIsLoading(true);
-    setErrorMessage("");
-    try {
-      const endpoint = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
-      const response = await fetch(endpoint, API_OPTIONS);
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch movies");
-      }
-
-      const data = await response.json();
-      console.log(data);
-
-      if (!data.results) {
-        setErrorMessage("No movies found");
-        setMovieList([]);
-        return;
-      }
-
-      setMovieList(data.results || []);
-    } catch (error) {
-      console.log(`Error fetching movies: ${error}`);
-      setErrorMessage("Error fetching movies");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-
-  return (
-    <header
-      id="header"
-      className="flex justify-center items-center px-16 py-40 m-0 bg-gray-800 text-white h-lvh w-full"
-    >
-      <div id="header-container">
-        {isLoading ? (
-          <p className="text-center text-xl">Loading movies...</p>
-        ) : errorMessage ? (
-          <p className="text-red-500 text-center">{errorMessage}</p>
-        ) : (
-          movieLists.length > 0 && (
-            <>
-              <h1>{movieLists[0].title}</h1>
-              <ul>
-                <li>13+</li>
-                <li>
-                  <ul>
-                    <li>Action</li>
-                    <li>Science fiction</li>
-                    <li>Comedy</li>
-                  </ul>
-                </li>
-                <li>2023</li>
-                <li>02h 29m</li>
-              </ul>
-              <div>
-                <button>Play</button>
-                <button>Watch trailer</button>
-              </div>
-              <p>{movieLists[0].overview || "No description available"}</p>
-            </>
-          )
-        )}
-      </div>
-    </header>
-  );
+            <div className="max-w-2xl relative z-10">
+                <h1 className="text-center text-7xl font-bold">{movie?.title || "Unknown Title"}</h1>
+                <ul className="flex justify-center space-x-4 my-5">
+                    <li className="border px-2 py-1 rounded">{movie?.adult ? "18+" : "13+"}</li>
+                    <li className="px-2 py-[5px]">{movie?.release_date ? movie.release_date.split("-")[0] : "N/A"}</li>
+                    <li className="px-2 py-[5px]">{movie?.genres?.length > 0 ? movie.genres.join(", ") : "N/A"}</li>
+                    <li className="px-2 py-[5px]">
+                        {typeof movie?.runtime === "number"
+                            ? `${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m`
+                            : "N/A"
+                        }
+                    </li>
+                </ul>
+                <p className="text-left text-xl mt-4">{movie?.overview || "No description available"}</p>
+            </div>
+        </header>
+    );
 };
 
 export default Header;
