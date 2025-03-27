@@ -5,4 +5,9 @@
 body {
   background-color: #f7fafc;
   font-family: 'Arial Bold', sans-serif;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Removes the scrollbar */
 }

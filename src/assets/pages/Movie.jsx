@@ -1,6 +1,8 @@
 const Movie = () => {
     return (
-        <h1>Movie</h1>
+        <div className="bg-[#141414] text-white h-[100vh]">
+
+        </div>
     )
 }
 

@@ -1,12 +1,25 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import logo_dark from "../images/logo_dark_n.png";
 // import logo_light from "../images/logo_light.png";
 
 const NavBar = () => {
+  useEffect(() => {
+    const navBar = document.getElementById("nav-bar");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        navBar.style.backgroundColor = "#141414";
+      } else {
+        navBar.style.backgroundColor = "transparent";
+      }
+    });
+  }, []);
+
   return (
     <nav
       id="nav-bar"
-      className="flex justify-center items-center px-16 py-4 m-0 text-white fixed top-0 w-full z-50"
+      className="flex justify-center items-center px-16 m-0 text-white fixed top-0 w-full z-50 transition-all duration-300"
     >
       <div
         id="nav-container"

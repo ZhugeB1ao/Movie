@@ -5,6 +5,8 @@ import Movie from "./assets/pages/Movie.jsx";
 import TV from "./assets/pages/TV.jsx";
 
 function App() {
+ 
+
   return (
     <>
       <NavBar />

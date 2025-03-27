@@ -3,7 +3,7 @@ const Header = ({movie}) => {
 
     return (
         <header
-            className="flex justify-start items-center px-28 py-40 m-0 text-white h-[90vh] w-full relative"
+            className="flex justify-start items-center px-28 py-40 m-0 text-white h-[85vh] w-full relative"
             style={{background: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path}) center/cover no-repeat`}}
         >
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#141414] h-full "></div>

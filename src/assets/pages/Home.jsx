@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header.jsx";
 import Body from "../components/Body.jsx";
+import Footer from "../components/Footer.jsx";
 import { fetchGenres, fetchMoviesData } from "../api/fetchMovie.jsx";
 
 const Home = () => {
@@ -36,6 +37,7 @@ const Home = () => {
         <>
             <Header movie={featuredMovie} />
             <Body {...moviesData} />
+            <Footer />
         </>
     );
 };
