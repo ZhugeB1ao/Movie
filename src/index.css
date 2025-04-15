@@ -11,3 +11,7 @@ body {
 ::-webkit-scrollbar {
   width: 0; /* Removes the scrollbar */
 }
+
+.swiper-pagination {
+  display: none !important; /* Hides the pagination */
+}
