@@ -15,3 +15,8 @@ body {
 .swiper-pagination {
   display: none !important; /* Hides the pagination */
 }
+
+.swiper-wrapper {
+  height: 100%;
+  width: auto
+}

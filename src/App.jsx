@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import NavBar from "./assets/components/NavBar.jsx";
-import Home from "./assets/pages/Home.jsx";
-import Movie from "./assets/pages/Movie.jsx";
-import TV from "./assets/pages/TV.jsx";
+import Home from "./pages/Home/index.jsx";
+import Movie from "./pages/Movie/index.jsx";
+import TV from "./pages/TV/index.jsx";
+import NavBar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/movie" element={<Movie />} />
         <Route path="/tv" element={<TV />} />
       </Routes>
+      <Footer />
     </>
   );
 }
