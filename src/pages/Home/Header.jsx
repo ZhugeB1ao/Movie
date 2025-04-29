@@ -9,7 +9,7 @@ const Header = ({ movie }) => {
       className="flex justify-start items-center text-white  relative flex-row 
                     px-12 md:px-16 lg:px-20
                     mt-12 md:mt-16 lg:mt-20
-                    h-[50vh] md:h-[70vh] lg:h-[75vh]"
+                    h-[50vh] lg:h-[75vh]"
       style={{
         background: `url(https://image.tmdb.org/t/p/original/${backdrop_path}) top/cover no-repeat`,
       }}

@@ -27,8 +27,7 @@ const MovieCard = ({ movie }) => {
       role="img"
       aria-label={movie.title || "Movie Poster"}
     >
-      {/* Sử dụng Tailwind CSS thay vì style jsx */}
-      <div className="hidden md:block h-full w-auto bg-cover bg-center" 
+      <div className="rounded-md hidden xl:block h-full w-auto bg-cover bg-center" 
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
         }}

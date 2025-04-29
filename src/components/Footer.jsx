@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-[#141414] flex justify-center h-[25vh]">
+    <footer className="bg-[#141414] flex justify-center h-[10vh]">
       <div className="flex flex-col justify-center items-center">
         <p className="text-center text-sm text-white">
           &copy; {new Date().getFullYear()} Movie Mania
