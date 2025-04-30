@@ -8,7 +8,7 @@ const NavBar = () => {
   return (
     <nav
       id="nav-bar"
-      className="flex justify-between items-center m-0 text-white fixed top-0 w-full z-50 transition-all duration-300 bg-black 
+      className="flex justify-between items-center m-0 text-white fixed top-0 w-full z-40 transition-all duration-300 bg-black 
                 px-4 md:px-8 lg:px-16"
     >
       <img

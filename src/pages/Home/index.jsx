@@ -1,14 +1,15 @@
 import Header from "./Header.jsx";
 import Body from "./Body.jsx";
 import { useHomeData } from "../../hooks/useHomeData.jsx";
+import Loading from "../../components/Loading.jsx";
+import { LoadingStatus } from "../../assets/constant/loadingConst.js";
 
 const Home = () => {
-  const { data, isLoading, isError } = useHomeData();
+  const { data, isLoading, isError } = useHomeData();  
 
-  if (isLoading)
-    return <p className="text-center text-xl">Loading movies...</p>;
-  if (isError)
-    return <p className="text-center text-xl">Error loading data 😢</p>;
+  if (isLoading) return <Loading status={LoadingStatus.LOADING} />;
+
+  if (isError) return <Loading status={LoadingStatus.NO_DATA} />;
 
   return (
     <>
