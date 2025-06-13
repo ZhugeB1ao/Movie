@@ -13,12 +13,23 @@ export const fetchGenres = async () => {
   }, {});
 };
 
-export const fetchMoviesData = async (genresList) => {
+export const fetchMoviesData = async (genresList, page=2) => {
+
   const categories = {
+    // 🎬 Movie Categories
     "Trending Movies": "/trending/movie/week",
+    "Popular Movies": "/movie/popular",
     "Top Rated Movies": "/movie/top_rated",
+    "Upcoming Movies": "/movie/upcoming",
+    "Now Playing Movies": "/movie/now_playing",
+    "New Movies": `/discover/movie?sort_by=primary_release_date.desc&primary_release_date.desc&page=${page}`,
+
+    // 📺 TV Categories
     "Trending TV Shows": "/trending/tv/week",
+    "Popular TV Shows": "/tv/popular",
     "Top Rated TV Shows": "/tv/top_rated",
+    "Airing Today TV Shows": "/tv/airing_today",
+    "New TV Shows": `/discover/tv?sort_by=first_air_date.desc&first_air_date.desc&page=${page}`,
   };
 
   const moviesPromises = Object.entries(categories).map(
@@ -40,7 +51,7 @@ export const fetchMoviesData = async (genresList) => {
   return Object.assign({}, ...moviesArray);
 };
 
-export const fetchMovieDetail = async (movieId, mediaType="movie") => {
+export const fetchMovieDetail = async (movieId, mediaType = "movie") => {
   const res = await fetch(
     `${API_BASE_URL}/${mediaType}/${movieId}?append_to_response=videos`,
     API_OPTIONS
@@ -66,4 +77,3 @@ export const fetchMovieTrailer = async (movieId) => {
     null
   );
 };
-
