@@ -1,4 +1,4 @@
-const TV = () => {
+const TVSeries = () => {
   return (
     <>
       <div className="flex justify-center items-center h-screen text-5xl text-white bg-black">
@@ -8,4 +8,4 @@ const TV = () => {
   );
 };
 
-export default TV;
+export default TVSeries;

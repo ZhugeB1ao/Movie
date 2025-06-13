@@ -13,8 +13,7 @@ export const fetchGenres = async () => {
   }, {});
 };
 
-export const fetchMoviesData = async (genresList, page=2) => {
-
+export const fetchMoviesData = async (genresList) => {
   const categories = {
     // 🎬 Movie Categories
     "Trending Movies": "/trending/movie/week",
@@ -22,14 +21,12 @@ export const fetchMoviesData = async (genresList, page=2) => {
     "Top Rated Movies": "/movie/top_rated",
     "Upcoming Movies": "/movie/upcoming",
     "Now Playing Movies": "/movie/now_playing",
-    "New Movies": `/discover/movie?sort_by=primary_release_date.desc&primary_release_date.desc&page=${page}`,
 
     // 📺 TV Categories
     "Trending TV Shows": "/trending/tv/week",
     "Popular TV Shows": "/tv/popular",
     "Top Rated TV Shows": "/tv/top_rated",
     "Airing Today TV Shows": "/tv/airing_today",
-    "New TV Shows": `/discover/tv?sort_by=first_air_date.desc&first_air_date.desc&page=${page}`,
   };
 
   const moviesPromises = Object.entries(categories).map(
@@ -76,4 +73,66 @@ export const fetchMovieTrailer = async (movieId) => {
     data.results.find((v) => v.type === "Trailer" && v.site === "YouTube") ||
     null
   );
+};
+
+export const fetchNewMovies = async (genresList, page = 1, pageSize = 20) => {
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  let currentPage = 1;
+  let validResults = [];
+
+  while (validResults.length < endIndex && currentPage <= 10) {
+    const res = await fetch(
+      `${API_BASE_URL}/discover/movie?sort_by=primary_release_date.desc&page=${currentPage}`,
+      API_OPTIONS
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch new movies");
+
+    const data = await res.json();
+
+    const filtered = data.results
+      .filter((movie) => movie.backdrop_path && movie.poster_path)
+      .map((movie) => ({
+        ...movie,
+        genres: movie.genre_ids?.map((id) => genresList[id] || "Unknown") ?? [],
+      }));
+
+    validResults = [...validResults, ...filtered];
+    currentPage++;
+  }
+
+  return validResults.slice(startIndex, endIndex);
+};
+
+export const fetchNewTVSeries = async (genresList, page = 1, pageSize = 20) => {
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  let currentPage = 1;
+  let validResults = [];
+
+  while (validResults.length < endIndex && currentPage <= 10) {
+    const res = await fetch(
+      `${API_BASE_URL}/discover/tv?sort_by=first_air_date.desc&page=${currentPage}`,
+      API_OPTIONS
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch new TV shows");
+
+    const data = await res.json();
+
+    const filtered = data.results
+      .filter((tv) => tv.backdrop_path && tv.poster_path)
+      .map((tv) => ({
+        ...tv,
+        genres: tv.genre_ids?.map((id) => genresList[id] || "Unknown") ?? [],
+      }));
+
+    validResults = [...validResults, ...filtered];
+    currentPage++;
+  }
+
+  return validResults.slice(startIndex, endIndex);
 };

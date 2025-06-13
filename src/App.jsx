@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home/index.jsx";
-import Movie from "./pages/Movie/index.jsx";
-import TV from "./pages/TV/index.jsx";
+import Movies from "./pages/Movies/index.jsx";
+import TVSeries from "./pages/TVSeries/index.jsx";
 
 import NavBar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -17,8 +17,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/movie" element={<Movie />} />
-        <Route path="/tv" element={<TV />} />
+        <Route path="/Movies" element={<Movies />} />
+        <Route path="/TVSeries" element={<TVSeries />} />
         <Route path="*" element={<Loading status={loadingStatus} />} />
       </Routes>
       <Footer />

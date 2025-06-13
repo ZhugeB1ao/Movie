@@ -39,13 +39,13 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="text-lg md:text-xl lg:text-2xl">
-          <Link to="/movie" onClick={() => setIsMenuOpen(false)}>
-            Movie
+          <Link to="/Movies" onClick={() => setIsMenuOpen(false)}>
+            Movies
           </Link>
         </li>
         <li className="text-lg md:text-xl lg:text-2xl">
-          <Link to="/tv" onClick={() => setIsMenuOpen(false)}>
-            TV
+          <Link to="/TVSeries" onClick={() => setIsMenuOpen(false)}>
+            TV Series
           </Link>
         </li>
       </ul>
