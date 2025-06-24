@@ -1,41 +1,62 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { useMovieGenres } from "./useMovieGenres.jsx";
+import { useTVGenres } from "./useTVGenres.jsx";
 import {
-  fetchGenres,
-  fetchMoviesData,
-  fetchNewMovies,
-  fetchNewTVSeries,
-} from "../api/tmdb.jsx";
+  fetchNowPlayingMovies,
+  fetchPopularMovies,
+  fetchTopRatedMovies,
+  fetchTrendingMovies,
+  fetchUpcomingMovies,
+} from "../api/movieAPI.jsx";
+import {
+  fetchAiringTodayTV,
+  fetchOnTheAirTV,
+  fetchPopularTV,
+  fetchTopRatedTV,
+} from "../api/TVAPI.jsx";
 
 export const useHomeData = () => {
-  const queryClient = useQueryClient();
+  const { data: movieGenres, isLoading: isMovieGenresLoading } = useMovieGenres();
+  const { data: tvGenres, isLoading: isTVGenresLoading } = useTVGenres();
+
+  const isGenresLoaded = !!movieGenres && !!tvGenres;
 
   return useQuery({
-    queryKey: ["home-movie-data"],
+    queryKey: ["home-movie-data", movieGenres, tvGenres],
+    enabled: isGenresLoaded,
     queryFn: async () => {
-      const genresList = await fetchGenres();
-      const movies = await fetchMoviesData(genresList);
-      const newMovie = await fetchNewMovies(genresList, 1);
-      const newTVSeries = await fetchNewTVSeries(genresList, 1);
-
-      queryClient.setQueryData(["new-movies", 1], newMovie);
-      queryClient.setQueryData(["new-tv-series", 1], newTVSeries);
-
-      const [featuredMovie, ...restTrendingMovies] =
-        movies["Trending Movies"] || [];
-
-      console.log("movies", movies);
-      console.log("restTrendingMovies", restTrendingMovies);
-      console.log("newMovie", newMovie);
-      console.log("newTVShow", newTVSeries);
+      const [
+        trendingMovies,
+        nowPlayingMovies,
+        popularMovies,
+        topRatedMovies,
+        upcomingMovies,
+        airingTodayTV,
+        onTheAirTV,
+        popularTV,
+        topRatedTV,
+      ] = await Promise.all([
+        fetchTrendingMovies(movieGenres),
+        fetchNowPlayingMovies(movieGenres),
+        fetchPopularMovies(movieGenres),
+        fetchTopRatedMovies(movieGenres),
+        fetchUpcomingMovies(movieGenres),
+        fetchAiringTodayTV(tvGenres),
+        fetchOnTheAirTV(tvGenres),
+        fetchPopularTV(tvGenres),
+        fetchTopRatedTV(tvGenres),
+      ]);
 
       return {
-        featuredMovie,
-        moviesData: {
-          ...movies,
-          "Trending Movies": restTrendingMovies,
-          // newMovies: newMovie,
-          // newTVShows: newTVShow,
-        },
+        trendingMovies,
+        nowPlayingMovies,
+        popularMovies,
+        topRatedMovies,
+        upcomingMovies,
+        airingTodayTV,
+        onTheAirTV,
+        popularTV,
+        topRatedTV,
       };
     },
     staleTime: 1000 * 60 * 10,
