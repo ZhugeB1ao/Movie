@@ -20,9 +20,6 @@ const fetchTVByType = async (type, genresList, page = 1) => {
   );
   if (!res.ok) throw new Error(`Failed to fetch ${type} TV shows`);
   const { results = [] } = await res.json();
-
-  console.log(`>> Fetched ${type} TV shows:`, results);
-
   return results.map(({ genre_ids = [], ...tv }) => ({
     ...tv,
     genres: genre_ids.map((id) => genresList[id] ?? "Unknown"),

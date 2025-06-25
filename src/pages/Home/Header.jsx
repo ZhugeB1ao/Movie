@@ -2,7 +2,7 @@ const Header = ( featuredMovie ) => {
   if (!featuredMovie)
     return <p className="text-center text-xl">No movie data available</p>;
 
-  const { backdrop_path, title, adult, release_date, genres, overview } = movie;
+  const { title, backdrop_path, overview, release_date, genres, adult } = featuredMovie.movie;
 
   return (
     <header
@@ -11,7 +11,7 @@ const Header = ( featuredMovie ) => {
                     mt-12 md:mt-16 lg:mt-20
                     h-[50vh] lg:h-[75vh]"
       style={{
-        background: `url(https://image.tmdb.org/t/p/original/${featuredMovie.backdrop_path}) top/cover no-repeat`,
+        background: `url(https://image.tmdb.org/t/p/original/${backdrop_path}) top/cover no-repeat`,
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#141414] h-full"></div>
@@ -31,16 +31,16 @@ const Header = ( featuredMovie ) => {
           className="flex flex-wrap justify-start
                     my-4 "
         >
-          <li className="border px-2 py-1 rounded">{featuredMovie.adult ? "18+" : "13+"}</li>
+          <li className="border px-2 py-1 rounded">{adult ? "18+" : "13+"}</li>
           <li className="px-2 py-[5px]">
-            {featuredMovie.release_date ? featuredMovie.release_date.split("-")[0] : "N/A year"}
+            {release_date ? release_date.split("-")[0] : "N/A year"}
           </li>
           <li className="py-[5px]">
-            {featuredMovie.genres?.length > 0 ? featuredMovie.genres.join(", ") : "N/A genre"}
+            {genres?.length > 0 ? genres.join(", ") : "N/A genre"}
           </li>
         </ul>
         <p className="text-sm md:text-base lg:text-lg">
-          {featuredMovie.overview || "No description available"}
+          {overview || "No description available"}
         </p>
         <button
           className=" border-2 rounded-3xl mx-0

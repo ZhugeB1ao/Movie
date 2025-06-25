@@ -7,7 +7,6 @@ export const fetchMovieGenres = async () => {
   );
   if (!res.ok) throw new Error("Failed to fetch genres");
   const data = await res.json();
-  console.log(">> Fetched Movie Genres:", data);
   return data.genres.reduce((acc, genre) => {
     acc[genre.id] = genre.name;
     return acc;
@@ -26,10 +25,7 @@ const fetchMoviesByType = async (type, genresList, page = 1) => {
     API_OPTIONS
   );
   if (!res.ok) throw new Error(`Failed to fetch ${type} movies`);
-  const { results = [] } = await res.json();
-
-  console.log(`>> Fetched ${type} movies:`, results);
-  
+  const { results = [] } = await res.json();  
   return results.map(({ genre_ids = [], ...movie }) => ({
     ...movie,
     genres: genre_ids.map((id) => genresList[id] ?? "Unknown"),   
@@ -56,8 +52,6 @@ export const fetchTrendingMovies = async (genresList, page = 1) => {
   if (!res.ok) throw new Error("Failed to fetch trending movies");
 
   const { results = [] } = await res.json();
-  console.log(">> Fetched trending movies:", results);
-
   return results.map(({ genre_ids = [], ...movie }) => ({
     ...movie,
     genres: genre_ids.map((id) => genresList[id] ?? "Unknown"),

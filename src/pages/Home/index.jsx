@@ -9,21 +9,15 @@ const Home = () => {
   
   if (isLoading) return <Loading status={LoadingStatus.LOADING} />;
   if (isError) return <Loading status={LoadingStatus.ERROR} />;
-  // if (!data) return <Loading status={LoadingStatus.NO_DATA} />
+  if (!data) return <Loading status={LoadingStatus.NO_DATA} />
 
-  const [ featuredMovie, ...restTrendingMovies ] = data.trendingMovies || [];
-  console.log(">> Featured Movie:", featuredMovie);
-  console.log(">> Rest Trending Movies:", restTrendingMovies);
-  
+  const [ featuredMovie, ...restTrendingMovies ] = data.TrendingMovies || [];
   const { trendingMovies, ...moviesData } = data;
-  console.log(">> Trending Movies:", trendingMovies);
-  console.log(">> Movies Data:", moviesData);
-
 
   return (
     <>
       <Header movie={featuredMovie} />
-      <Body trendingMovies={restTrendingMovies} {...moviesData} />
+      <Body TrendingMovies={restTrendingMovies} {...moviesData} />
     </>
   );
 };
