@@ -9,7 +9,7 @@ const Home = () => {
   
   if (isLoading) return <Loading status={LoadingStatus.LOADING} />;
   if (isError) return <Loading status={LoadingStatus.ERROR} />;
-  if (!data) return <Loading status={LoadingStatus.NO_DATA} />
+  if (!data) return <Loading status={LoadingStatus.LOADING} />
 
   const [ featuredMovie, ...restTrendingMovies ] = data.TrendingMovies || [];
   const { trendingMovies, ...moviesData } = data;

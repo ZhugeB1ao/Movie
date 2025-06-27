@@ -7,6 +7,8 @@ export const fetchMovieGenres = async () => {
   );
   if (!res.ok) throw new Error("Failed to fetch genres");
   const data = await res.json();
+  console.log("Fetched movie genres:", data.genres);
+  
   return data.genres.reduce((acc, genre) => {
     acc[genre.id] = genre.name;
     return acc;

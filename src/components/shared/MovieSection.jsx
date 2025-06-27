@@ -7,6 +7,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+const splitTitle = (str) => {
+  return str
+    .replace(/([a-z])([A-Z])/g, "$1 $2") 
+    .replace(/^./, (c) => c.toUpperCase());
+}  
+
 const MovieSection = ({ title, movies, index }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [buttonWidth, setButtonWidth] = useState(0);
@@ -83,7 +89,7 @@ const MovieSection = ({ title, movies, index }) => {
 
   return (
     <>
-      <h1 className="pl-10 pt-10 text-xl">{title}</h1>
+      <h1 className="pl-10 pt-10 text-xl">{splitTitle(title)}</h1>
       <div
         className="mt-10 relative
                     h-[25vh] lg:h-[20vh] xl:h-[40vh]"
