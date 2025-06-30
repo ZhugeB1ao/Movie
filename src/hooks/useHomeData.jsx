@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useMovieContext } from "../contexts/MovieDataContext.jsx";
 import { useMovieGenres } from "./useMovieGenres.jsx";
 import { useTVGenres } from "./useTVGenres.jsx";
-// import { usePopularMovies } from "./usePopularMovies.jsx";
+import { useMovieData } from "./useMovieData.jsx";
 import {
   fetchNowPlayingMovies,
   fetchTopRatedMovies,
@@ -15,13 +17,19 @@ import {
 } from "../api/TVAPI.jsx";
 
 export const useHomeData = () => {
-  const { data: movieGenres, isLoading: isMovieGenresLoading } = useMovieGenres();
-  const { data: tvGenres, isLoading: isTVGenresLoading } = useTVGenres();
+  const { setMovieData } = useMovieContext();
+  const { data: moviePage1Data, isSuccess: isMovieDataLoaded } = useMovieData(1);
 
+  const { data: movieGenres } = useMovieGenres();
+  const { data: tvGenres } = useTVGenres();
   const isGenresLoaded = !!movieGenres && !!tvGenres;
 
-  // const { data: popularMovies, isLoading: isPopularMoviesLoading } = usePopularMovies();
-  
+  useEffect(() => {
+    if (isMovieDataLoaded) {
+      setMovieData(moviePage1Data);
+    }
+  }, [isMovieDataLoaded, moviePage1Data, setMovieData]);
+
   return useQuery({
     queryKey: ["home-data", movieGenres, tvGenres],
     enabled: isGenresLoaded,
