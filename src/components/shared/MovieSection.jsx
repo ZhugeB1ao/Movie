@@ -143,10 +143,12 @@ const MovieSection = ({ title, movies, index }) => {
                 overlayTimeout.current = setTimeout(() => {
                   setShowOverlay(true);
                 }, 700);
+                console.log("Hovered index:", idx);
               }}
               onMouseLeave={() => {
                 overlayIdxRef.current = null;
                 clearTimeout(overlayTimeout.current);
+                console.log("Mouse left index:", idx);
               }}
             >
               <div className="relative h-full w-full">
