@@ -1,24 +1,24 @@
 const MovieCard = ({ movie }) => {
-
   return (
-    <div
-      className="rounded-md transition-transform duration-300 ease-in-out z-50 block "
-      style={{
-        height: "100%",
-        width: "auto",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.poster_path})`,
-      }}
-      role="img"
-      aria-label={movie.title || "Movie Poster"}
-    >
-      {/* <div className="rounded-md hidden xl:block h-full w-auto bg-cover bg-center" 
-        style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
-        }}
-      ></div> */}
+    // <div className="rounded-md overflow-hidden aspect-[2/3] bg-gray-900">
+    //   <img
+    //     src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+    //     alt={movie.title || "Movie Poster"}
+    //     className="object-cover w-full h-full"
+    //     loading="lazy"
+    //   />
+
+    // </div>
+    <div className="rounded-lg items-center">
+      <img
+        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+        alt={movie.title || movie.name}
+        className="w-full rounded-lg mb-2"
+        loading="lazy"
+      />
+      <div className="text-white text-center text-lg font-medium m-5">
+        {movie.title || movie.name}
+      </div>
     </div>
   );
 };

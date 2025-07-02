@@ -10,7 +10,7 @@ const MAX_PAGE = 20;
 
 const MovieSlider = ({ items, page, setPage }) => {
   return (
-    <div className="relative">
+    <div className="relative p-10 bg-[#141414]">
       <Swiper
         modules={[Grid, Navigation, Pagination]}
         spaceBetween={20}
@@ -24,24 +24,23 @@ const MovieSlider = ({ items, page, setPage }) => {
         }}
         initialSlide={page - 1}
         pagination={{ clickable: true, type: "bullets" }}
-        className="px-10"
       >
         {items?.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="bg-gray-800 p-3 rounded-lg flex flex-col items-center">
+            <div className="rounded-lg items-center">
               <img
                 src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
                 alt={item.title || item.name}
                 className="w-full rounded-lg mb-2"
               />
-              <div className="text-white text-center text-sm font-medium">
+              <div className="text-white text-center text-lg font-medium mb-10 mt-10">
                 {item.title || item.name}
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="flex items-center justify-center gap-6 mt-4">
+      <div className="flex items-center justify-center gap-6 mt-20">
         <button
           className="bg-gray-700 hover:bg-gray-600 text-white rounded-full p-2 disabled:opacity-50"
           disabled={page === 1}
@@ -50,7 +49,7 @@ const MovieSlider = ({ items, page, setPage }) => {
         >
           <ChevronLeft size={28} />
         </button>
-        <div className="text-black text-lg font-semibold min-w-[90px]">
+        <div className="text-white text-lg font-semibold min-w-[90px] border-2 border-gray-600 rounded-lg text-center p-2">
           Page {page} / {MAX_PAGE}
         </div>
         <button

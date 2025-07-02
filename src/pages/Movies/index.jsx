@@ -4,7 +4,7 @@ import { useMovieContext } from "../../contexts/MovieDataContext.jsx";
 import { useMovieData } from "../../hooks/useMovieData.jsx";
 import Loading from "../../components/Loading.jsx";
 import { LoadingStatus } from "../../assets/constant/loadingConst.js";
-import { use, useState } from "react";
+import { useState } from "react";
 
 const Movies = () => {
   const [page, setPage] = useState(1);

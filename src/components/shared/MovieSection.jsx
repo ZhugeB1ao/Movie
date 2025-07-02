@@ -91,12 +91,11 @@ const MovieSection = ({ title, movies, index }) => {
     <>
       <h1 className="pl-10 pt-10 text-xl">{splitTitle(title)}</h1>
       <div
-        className="mt-10 relative
-                    h-[25vh] lg:h-[20vh] xl:h-[40vh]"
+        className="mt-10 relative h-auto"
       >
         <button
           className={`custom-prev-${index} transform text-white bg-black opacity-70 z-20 rounded-tr-md rounded-br-md absolute left-0 top-0 flex justify-center items-center h-full`}
-          style={{ width: `${buttonWidth}px` }}
+          style={{ width: `${buttonWidth}px`, height: "100%" }}
         >
           <ChevronLeft size={24} />
         </button>
@@ -137,7 +136,7 @@ const MovieSection = ({ title, movies, index }) => {
           {movies.map((movie, idx) => (
             <SwiperSlide
               key={movie.id}
-              className="h-full w-full absolute left-0 top-0 z-10 "
+              className="h-full w-full absolute left-0 top-0 z-10"
               onMouseEnter={() => {
                 setHoveredIndex(idx);
                 overlayIdxRef.current = idx;
@@ -150,10 +149,7 @@ const MovieSection = ({ title, movies, index }) => {
                 clearTimeout(overlayTimeout.current);
               }}
             >
-              <div
-                className="relative h-full w-full"
-                ref={(el) => (slideRefs.current[idx] = el)}
-              >
+              <div className="relative h-full w-full">
                 <MovieCard movie={movie} />
               </div>
             </SwiperSlide>

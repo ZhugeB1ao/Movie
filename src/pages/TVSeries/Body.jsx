@@ -1,9 +1,9 @@
 import MovieSlider from "../../components/shared/MovieSlider";
 
-const Body = ({ movies, page, setPage }) => {
+const Body = ({ tvs, page, setPage }) => {
   return (
     <div className="text-center">
-      <MovieSlider items={movies} page={page} setPage={setPage} />
+      <MovieSlider items={tvs} page={page} setPage={setPage} />
     </div>
   );
 };
